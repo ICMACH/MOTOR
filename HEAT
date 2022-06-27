@@ -1,0 +1,43 @@
+int HEAT_PIN = 5;
+int BUTTON_1 = 13;
+int BUTTON_2 = 11;
+int hot = 0;
+int dt = 100;
+int button1val;
+int button2val;
+
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(BUTTON_1, INPUT);
+  pinMode(BUTTON_2, INPUT);
+  pinMode(HEAT_PIN, OUTPUT);
+
+  digitalWrite(BUTTON_1, HIGH);
+  digitalWrite(BUTTON_2, HIGH);
+
+}
+
+void loop() {
+  
+  button1val = digitalRead(BUTTON_1);
+  button2val = digitalRead(BUTTON_2);
+
+  
+
+  Serial.print("Heat Level: ");
+  Serial.println(hot);
+
+  if (button1val==1){
+    hot = hot + 42.6;
+    delay(dt);
+  }
+  if(hot >= 255){
+    hot = 42.6;
+  }
+  if (button2val==0){
+  analogWrite(HEAT_PIN, 0);
+  delay(dt);
+  }
+  analogWrite(HEAT_PIN, hot);
+  
