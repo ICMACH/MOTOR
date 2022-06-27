@@ -1,0 +1,32 @@
+const int FAN_PIN = 5;
+const int buttonPin = 13;
+
+bool bPressed = false, bPressedOld = false;
+bool fanOn = false; 
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(FAN_PIN, OUTPUT);
+  pinMode(buttonPin, INPUT);
+}
+
+void loop() {
+  bPressed = digitalRead(buttonPin);
+  printInfo();
+
+  if(bPressed && bPressedOld);
+{
+  fanOn = !fanOn;
+  digitalWrite(buttonPin, fanOn);
+}
+
+ bPressedOld = bPressed;
+}
+
+void printInfo(){
+  Serial.print("ButtonState :");
+  Serial.println(buttonPin);
+  Serial.print("FanState: ");
+  Serial.println(fanOn);
+}
